@@ -2,6 +2,7 @@
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
+using Serilog;
 
 namespace Restaurants
 {
@@ -17,6 +18,10 @@ namespace Restaurants
 
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Host.UseSerilog((context, configuration)
+                => configuration
+                .ReadFrom.Configuration(context.Configuration)
+                );
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -28,6 +33,8 @@ namespace Restaurants
             var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
 
             await seeder.Seed();
+
+            app.UseSerilogRequestLogging();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
