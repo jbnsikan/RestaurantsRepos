@@ -13,7 +13,7 @@ namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant
         public async Task Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
         {
             logger.LogInformation($"Update restaurant by {request.Id}");
-            var restaurant = await restaurantsRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException($"Restaurant with {request.Id} doesn't exist");
+            var restaurant = await restaurantsRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Restaurant), request.Id.ToString());
             mapper.Map(request, restaurant);
             await restaurantsRepository.SaveChanges();
         }
