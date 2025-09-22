@@ -1,4 +1,5 @@
 
+using Restaurants.API.Middlewares;
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
@@ -15,6 +16,8 @@ namespace Restaurants
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddScoped<ErrorHandlingMiddle>();
 
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure(builder.Configuration);
@@ -34,6 +37,7 @@ namespace Restaurants
 
             await seeder.Seed();
 
+            app.UseMiddleware<ErrorHandlingMiddle>();
             app.UseSerilogRequestLogging();
 
             // Configure the HTTP request pipeline.
