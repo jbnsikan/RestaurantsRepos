@@ -12,7 +12,7 @@ namespace Restaurants.Infrastructure.Authorization
             var currentUser = userContext.GetCurrentUser();
             logger.LogInformation("User: {Email}, date of birth {DoB} - Handling MinimumAgeRequirement", currentUser?.Email, currentUser?.DateOfBirth);
 
-            if (currentUser.DateOfBirth == null) 
+            if (currentUser!.DateOfBirth == null) 
             {
                 logger.LogWarning("User date of birth is null");
                 context.Fail();
