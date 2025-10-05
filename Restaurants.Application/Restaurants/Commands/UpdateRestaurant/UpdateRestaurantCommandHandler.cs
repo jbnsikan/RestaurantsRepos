@@ -20,7 +20,7 @@ namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant
             logger.LogInformation($"Update restaurant by {request.Id}");
             var restaurant = await restaurantsRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Restaurant), request.Id.ToString());
 
-            if (!restaurantAuthorizationService.Authorize(restaurant, RessourceOperation.Delete))
+            if (!restaurantAuthorizationService.Authorize(restaurant, RessourceOperation.Update))
             {
                 throw new ForbidException();
             }
