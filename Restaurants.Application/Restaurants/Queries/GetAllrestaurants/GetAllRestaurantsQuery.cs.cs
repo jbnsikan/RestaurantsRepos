@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Restaurants.Application.Common;
 using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Domain.Constants;
 
 namespace Restaurants.Application.Restaurants.Queries.GetAllrestaurants
 {
@@ -10,5 +11,7 @@ namespace Restaurants.Application.Restaurants.Queries.GetAllrestaurants
         public string? SearchPhrase { get; set; }
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
+        public string? SortBy { get; set; }
+        public SortDirection SortDirection { get; set; }
     }
 }

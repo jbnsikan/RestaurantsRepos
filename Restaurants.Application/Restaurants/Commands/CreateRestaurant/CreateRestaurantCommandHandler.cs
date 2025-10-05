@@ -7,7 +7,7 @@ using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Commands.CreateRestaurant
 {
-    public class GetRestaurantByIdQueryHandler(ILogger<GetRestaurantByIdQueryHandler> logger, IMapper mapper, IRestaurantsRepository restaurantsRepository, IUserContext userContext) 
+    public class CreateRestaurantCommandHandler(ILogger<CreateRestaurantCommandHandler> logger, IMapper mapper, IRestaurantsRepository restaurantsRepository, IUserContext userContext) 
         : IRequestHandler<CreateRestaurantCommand, int>
     {
         public async Task<int> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
